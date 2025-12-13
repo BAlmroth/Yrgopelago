@@ -1,0 +1,1 @@
+<!-- en lista på alla features, deras pris osv. anropa från db -->

@@ -1,0 +1,1 @@
+<!-- alla rum och dess info anropa från db -->
