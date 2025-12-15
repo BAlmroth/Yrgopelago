@@ -19,7 +19,7 @@
      max="2026-01-31"
      >
     </select>
-    <button type="submit" class="dates-button">book</button>
+    <button type="submit" class="dates-button">Continue</button>
 </form>
 
 
@@ -46,9 +46,13 @@ if (isset($_POST['arrival'], $_POST['departure'])){
     } 
     else {
         echo "
-        You have booked the (room) <br>
+        Review your choices <br>
+        You have booked The (room) <br>
         Dates: $arrival - $departure <br>
-        Under the name (name)";
-    }
+        Features: (feature 1), (feature 2) <br>
+        Under the name (name) <br>
+        Total price: (price) Bells"; ?>
+        <button>proceed to booking</button>
+   <?php } 
 };
 ?>
