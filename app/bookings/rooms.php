@@ -1,10 +1,6 @@
 <?php require __DIR__ . '/../autoload.php'; ?>
 
-<?php 
-
-$statement = $database->query('SELECT * FROM rooms ORDER BY id');
-
-$rooms = $statement->fetchAll(PDO::FETCH_ASSOC); ?>
+<?php $rooms = getRooms($database);?>
 
 <?php
 
