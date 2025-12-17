@@ -7,7 +7,7 @@ if (isset($_POST['userId'], $_POST['checkIn'], $_POST['checkOut'], $_POST['room'
     $room = $_POST['room'];
     $userId = htmlspecialchars(trim($_POST['userId']));
 
-    if ($checkOut <= $checkIn) {
+    if ($checkOut <= $checkIn) {    
         echo 'The checkOut date can\'t be before the checkIn date.';
     } 
     else {

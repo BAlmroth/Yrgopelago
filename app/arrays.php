@@ -4,8 +4,8 @@ declare(strict_types=1);
 // features
 $featureGrid = [
   'water' => [
-      'economy' => 'bathtub',
-      'basic' => 'pool',
+      'economy' => 'pool',
+      'basic' => 'scuba diving',
       'premium' => 'olympic pool',
       'superior' => 'waterpark with fire and minibar'
   ],
@@ -21,11 +21,11 @@ $featureGrid = [
       'premium' => 'trike',
       'superior' => 'four-wheeled motorized beast'
   ],
-  'cozy' => [
-      'economy' => 'bad book',
-      'basic' => 'good book',
-      'premium' => 'library and a fireplace',
-      'superior' => 'nobel prize winner in literature reads a book for you'
+  'stardew-experience' => [
+      'economy' => 'fishing trip',
+      'basic' => 'fresh farmstyle-breakfast',
+      'premium' => 'spend a day as a farmer',
+      'superior' => 'visit the scull cavern'
   ],
 ];
 

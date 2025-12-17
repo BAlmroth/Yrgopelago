@@ -1,12 +1,34 @@
 <?php 
 
+//get rooms från sql
 function getRooms ($database) {
-
-    $statement = $database->query('SELECT * FROM rooms ORDER BY id');
+    $statement = $database->query("
+    SELECT * 
+    FROM rooms 
+    ORDER BY id
+    ");
     
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 
 }
-// getRooms($database);
 
+//get features från sql
+function getFeatures($database) {
+    $statement = $database->query("
+        SELECT name, cost
+        FROM features
+        WHERE name IN (
+            'fishing trip',
+            'fresh farmstyle-breakfast',
+            'yahtzee',
+            'ping pong table',
+            'olympic pool',
+            'trike',
+            'four-wheeled motorized beast'
+        )
+        ORDER BY cost ASC
+    ");
+
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
