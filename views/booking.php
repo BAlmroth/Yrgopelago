@@ -1,4 +1,5 @@
 <?php require __DIR__ . '/../app/autoload.php'; ?>
+<link rel="stylesheet" href="/assets/styles/booking.css">
 
 <!-- checkIn -->
  <form action="/app/bookings/validateBooking.php" method="post">
@@ -52,3 +53,6 @@
     
     <button type="submit" class="dates-button">Continue</button>
 </form>
+
+<!-- //gör om så att när man har vlt och trycker continue ska man skickas till validateBooking, där kollas det om allt är rätt. om det inte är rätt skickas man tillbaka till booking.php och får ett error meddelande.
+är det rätt -> printa valen på booking för validering.  -->

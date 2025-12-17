@@ -2,7 +2,7 @@
 <?php require __DIR__ . '/views/header.php'; ?>
 
 
-<form action="views/booking.php">
+<form action="/views/booking.php">
     <input type="submit" value="Go to booking" />
 </form>
 
