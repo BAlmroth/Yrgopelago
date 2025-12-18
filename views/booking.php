@@ -42,15 +42,15 @@
     $features = getFeatures($database); 
     foreach ($features as $feature) { ?>
         <label>
-            <input 
-                type="checkbox" 
-                name="features[]" 
-                value="<?= htmlspecialchars($feature['name']) ?>"
-            >
-            <?= htmlspecialchars($feature['name']) ?> (<?= $feature['cost'] ?> g)
-        </label>
-    <?php } ?>
-    
+    <input 
+        type="checkbox" 
+        name="features[]"
+        value="<?= $feature['id'] ?>"
+    >
+        <?= ($feature['name']) ?> (<?= $feature['cost'] ?> g)
+            </label>
+        <?php } ?>
+        
     <button type="submit" class="dates-button">Continue</button>
 </form>
 

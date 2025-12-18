@@ -12,6 +12,14 @@ function getRooms ($database) {
 
 }
 
+// function getTotalPrice ($database) {
+//     $statement = database ->query("
+//     SELECT *
+//     FROM rooms
+//     INNER JOIN 
+//     ")
+// }
+
 // get booked dates and rooms, connected to room id.
 function getBookings ($database) {
     $statement = $database->query("
@@ -29,7 +37,7 @@ function getBookings ($database) {
 //get features från sql
 function getFeatures($database) {
     $statement = $database->query("
-        SELECT name, cost
+        SELECT id, name, cost
         FROM features
         WHERE name IN (
             'fishing trip',
