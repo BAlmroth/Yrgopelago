@@ -50,8 +50,14 @@
         <?= ($feature['name']) ?> (<?= $feature['cost'] ?> g)
             </label>
         <?php } ?>
+
+    <label for="transferCode">insert transfercode:</label>
+        <input 
+        name="transferCode" 
+        id="transferCode" 
+        type="text">
         
-    <button type="submit" class="dates-button">Continue</button>
+    <button type="submit" class="dates-button">Finalize booking</button>
 </form>
 
 <!-- //gör om så att när man har vlt och trycker continue ska man skickas till validateBooking, där kollas det om allt är rätt. om det inte är rätt skickas man tillbaka till booking.php och får ett error meddelande.
