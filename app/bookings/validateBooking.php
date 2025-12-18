@@ -22,6 +22,11 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
         $errors[] = "The check-out date can't be before the check-in date.";
     }
 
+    if ($userId === '') {
+        $errors[] = "Please insert your name (user id)";
+    }
+
+
     if (count($errors) === 0) {
 
         $bookings = getBookings($database);
@@ -51,7 +56,8 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
         $roomId = $roomStatement->fetchColumn();
 
         $statement = $database->prepare("
-            INSERT INTO bookings (user_id, room_id, check_in, check_out)
+            INSERT INTO bookings 
+            (user_id, room_id, check_in, check_out)
             VALUES (?, ?, ?, ?)
         ");
 
