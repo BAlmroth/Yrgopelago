@@ -6,4 +6,13 @@
     <input type="submit" value="Go to booking" />
 </form>
 
+<?php 
+        $bookings = getBookings($database);
+        foreach ($bookings as $booking) {
+            
+            echo '<pre>';
+            print_r($booking);
+        }
+?>
+
 <?php require __DIR__ . '/views/footer.php'; ?>

@@ -12,6 +12,20 @@ function getRooms ($database) {
 
 }
 
+// get booked dates and rooms, connected to room id.
+function getBookings ($database) {
+    $statement = $database->query("
+    SELECT * 
+    FROM bookings
+    INNER JOIN rooms
+    ON bookings.room_id = rooms.id
+    ORDER BY rooms.id ASC
+    ");
+    
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
 //get features från sql
 function getFeatures($database) {
     $statement = $database->query("
