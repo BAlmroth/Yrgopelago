@@ -60,5 +60,18 @@
     <button type="submit" class="dates-button">Finalize booking</button>
 </form>
 
+<link rel="stylesheet" href="/assets/styles/calendar.css">
+
+<?php
+$rooms = getRooms($database);
+
+foreach ($rooms as $room) {
+    echo ($room['name']);
+
+    $roomId = $room['id'];
+    require __DIR__ . '/../app/bookings/calendar.php';
+}
+?>
+
 <!-- //gör om så att när man har vlt och trycker continue ska man skickas till validateBooking, där kollas det om allt är rätt. om det inte är rätt skickas man tillbaka till booking.php och får ett error meddelande.
 är det rätt -> printa valen på booking för validering.  -->

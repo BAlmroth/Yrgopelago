@@ -1,27 +1,40 @@
-
-
- <!-- calender  -->
-
-     <link rel="stylesheet" href="/assets/styles/calendar.css">
-
 <?php
-// Days when the room is booked
-$booked = [2, 6, 19, 27, 28];
+// Hämta alla bokningar för detta rum
+$statement = $database->prepare("
+    SELECT check_in, check_out 
+    FROM bookings 
+    WHERE room_id = ?
+");
+
+$statement->execute([$roomId]);
+$bookings = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+// Bygg lista med bokade dagar
+$bookedDays = [];
+
+foreach ($bookings as $booking) {
+    $start = date('j', strtotime($booking['check_in']));
+    $end   = date('j', strtotime($booking['check_out']));
+
+    for ($d = $start; $d < $end; $d++) {
+        $bookedDays[] = $d;
+    }
+}
 ?>
 
 <section class="calendar">
-    <?php
-    for ($i = 1; $i <= 31; $i++) :
-        if (in_array($i, $booked)) {
-    ?><div class="day booked"><?= $i; ?></div>
-        <?php
-        } else if (($i % 7) === 0 || ($i % 7) === 6) {
-        ?><div class="day weekend"><?= $i; ?></div>
-        <?php
-        } else {
-        ?><div class="day"><?= $i; ?></div>
-    <?php
-        }
-    endfor; ?>
+<?php
+for ($day = 1; $day <= 31; $day++) {
 
+    $classes = ['day'];
+
+    if (in_array($day, $bookedDays)) {
+        $classes[] = 'booked';
+    } elseif ($day % 7 === 0 || $day % 7 === 6) {
+        $classes[] = 'weekend';
+    }
+
+    echo '<div class="' . implode(' ', $classes) . '">' . $day . '</div>';
+}
+?>
 </section>
