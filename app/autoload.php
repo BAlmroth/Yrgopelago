@@ -2,9 +2,6 @@
 //vill ha på alla sidor
 declare(strict_types=1);
 
-// Start the session engines.
-session_start();
-
 // Set the default timezone to coordinated universal time.
 date_default_timezone_set('UTC');
 
