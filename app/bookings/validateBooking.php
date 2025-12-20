@@ -1,5 +1,9 @@
 <?php
 require __DIR__ . '/../autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 $errors = [];
 
@@ -10,6 +14,7 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
     $checkOut = $_POST['checkOut'];
     $room = $_POST['room'];
     $selectedFeatures = $_POST['features'] ?? [];
+    $transferCode = $_POST['transferCode'] ?? '';
 
     if ($checkIn === '') {
         $errors[] = "Please select a check-in date.";
@@ -113,6 +118,55 @@ if (!$isBooked) {
         $totalPrice += $featuresCost;
         echo $totalPrice;
     }
+
+    // validate transferCode
+if ($transferCode === '') {
+    $errors[] = "Please insert a transfer code.";
+} else {
+    try {
+        $client = new Client([
+            'base_uri' => 'https://www.yrgopelag.se/centralbank/',
+        ]);
+
+        $response = $client->post('transferCode', [
+            'json' => [
+                'transferCode' => $transferCode,
+                'totalCost' => $totalPrice,
+            ]
+        ]);
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        if (!isset($result['status']) || $result['status'] !== 'success') {
+            $errors[] = "Transfer code validation failed.";
+        }
+
+    } catch (RequestException $e) {
+        $errors[] = "Invalid or already used transfer code.";
+    }
+}
+
+// deposit transfer code (get paid)
+if (count($errors) === 0) {
+    try {
+        $response = $client->post('deposit', [
+            'json' => [
+                'user' => 'Benita',
+                'transferCode' => $transferCode,
+            ]
+        ]);
+
+        $depositResult = json_decode($response->getBody()->getContents(), true);
+
+        if (!isset($depositResult['status']) || $depositResult['status'] !== 'success') {
+            $errors[] = "Deposit failed.";
+        }
+
+    } catch (RequestException $e) {
+        $errors[] = "Could not complete payment.";
+    }
+}
+
 }
 
 }
