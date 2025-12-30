@@ -59,8 +59,6 @@
     <button type="submit" class="dates-button">Finalize booking</button>
 </form>
 
-<link rel="stylesheet" href="/assets/styles/calendar.css">
-
 <?php
 $rooms = getRooms($database);
 
