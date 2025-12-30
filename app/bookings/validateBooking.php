@@ -39,6 +39,7 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
         }
 
         if (!$isBooked) {
+
             // User stays logic
             $userStatement = $database->prepare("SELECT id, stays FROM users WHERE name = ?");
             $userStatement->execute([$userId]);
@@ -94,32 +95,44 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
             }
 
             $client = new Client(['base_uri' => 'https://www.yrgopelag.se/centralbank/']);
-            $hotelUser = 'Benita'; // your hotel owner username
+            $hotelUser = 'Benita';
             $apiKey = $_ENV['API_KEY'];
 
             try {
                 // Validate transfer code
                 $res = $client->post('transferCode', [
-                    'json' => ['transferCode' => $transferCode, 'totalCost' => $totalPrice]
+                    'json' => [
+                        'transferCode' => $transferCode,
+                        'totalCost' => $totalPrice
+                    ]
                 ]);
                 $validate = json_decode($res->getBody(), true);
                 if (isset($validate['error'])) throw new Exception($validate['error']);
 
                 // Deposit
                 $res = $client->post('deposit', [
-                    'json' => ['user' => $hotelUser, 'transferCode' => $transferCode]
+                    'json' => [
+                        'user' => $hotelUser,
+                        'transferCode' => $transferCode
+                    ]
                 ]);
                 $deposit = json_decode($res->getBody(), true);
                 if (!isset($deposit['status']) || $deposit['status'] !== "success") {
                     throw new Exception($deposit['error'] ?? "Deposit failed");
                 }
 
-                // Receipt
-                $featuresForReceipt = array_map(function($id) use ($database) {
-                    $stmt = $database->prepare("SELECT activity, tier FROM features WHERE id = ?");
+                // Receipt (UPDATED SAFELY)
+                $featuresForReceipt = [];
+
+                foreach ($bookedFeatures as $id) {
+                    $stmt = $database->prepare("SELECT category AS activity, tier FROM features WHERE id = ?");
                     $stmt->execute([$id]);
-                    return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
-                }, $bookedFeatures);
+                    $feature = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    if ($feature) {
+                        $featuresForReceipt[] = $feature;
+                    }
+                }
 
                 $res = $client->post('receipt', [
                     'json' => [
@@ -132,12 +145,13 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                         'star_rating' => 1
                     ]
                 ]);
+
                 $receipt = json_decode($res->getBody(), true);
                 if (!isset($receipt['status']) || $receipt['status'] !== 'success') {
                     throw new Exception($receipt['error'] ?? "Receipt failed");
                 }
 
-                echo "WOOOHOOOOOOOOO reciept sent!!!!";
+                echo "WOOOHOOOOOOOOO receipt sent!!!!";
 
             } catch (Exception $e) {
                 $errors[] = $e->getMessage();
