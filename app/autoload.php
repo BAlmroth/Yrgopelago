@@ -2,14 +2,11 @@
 //vill ha på alla sidor
 declare(strict_types=1);
 
-// Start the session engines.
-session_start();
-
 // Set the default timezone to coordinated universal time.
 date_default_timezone_set('UTC');
 
 // Set the default character encoding to UTF-8.
-mb_internal_encoding('UTF-8');
+mb_internal_encoding('UTF-8');  
 
 // Include the helper functions.
 require __DIR__ . '/functions.php';
@@ -19,5 +16,11 @@ $config = require __DIR__ . '/config.php';
 
 // Setup the database connection.
 $database = new PDO($config['database_path']);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+// api key
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..'); 
+$dotenv->load();
 
 ?>
