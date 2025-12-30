@@ -170,6 +170,6 @@ if (!empty($errors)) {
 }
 ?>
 
-<form action="/../../views/booking.php">
+<form action="<?= $config['base_url'] ?>/views/booking.php">
     <input type="submit" value="Back" /> 
 </form>

@@ -2,7 +2,7 @@
 <?php require __DIR__ . '/header.php'; ?>
 
 <!-- checkIn -->
- <form action="app/bookings/validateBooking.php" method="post">
+<form action="<?= $config['base_url'] ?>/app/bookings/validateBooking.php" method="post">
 
     <label for="userId">Please provide your name:</label>
     <input 
