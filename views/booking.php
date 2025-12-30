@@ -1,5 +1,4 @@
 <?php require __DIR__ . '/../app/autoload.php'; ?>
-<link rel="stylesheet" href="/assets/styles/booking.css">
 
 <!-- checkIn -->
  <form action="/app/bookings/validateBooking.php" method="post">
