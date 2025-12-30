@@ -46,11 +46,13 @@ function getFeatures($database) {
             'ping pong table',
             'olympic pool',
             'trike',
-            'four-wheeled motorized beast'
+            'four-wheeled motorized beast',
+            'spend a day as a farmer',
+            'visit the scull cavern'
         )
         ORDER BY cost ASC
     ");
-
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 ?>
