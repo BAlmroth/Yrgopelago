@@ -1,7 +1,8 @@
 <?php require __DIR__ . '/../app/autoload.php'; ?>
+<?php require __DIR__ . '/header.php'; ?>
 
 <!-- checkIn -->
- <form action="/app/bookings/validateBooking.php" method="post">
+ <form action="app/bookings/validateBooking.php" method="post">
 
     <label for="userId">Please provide your name:</label>
     <input 
