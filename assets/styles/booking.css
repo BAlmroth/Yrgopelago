@@ -6,11 +6,21 @@ form {
 	max-width: 720px;
 	margin: 1.5rem;
 	padding: 1rem;
+    background-color: #d1f8ffab;
 }
 
-label {
-	font-weight: 600;
+.upperForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
+
+.calendars {
+    text-align: center;
+    margin: 2rem;
+    
+}
+
 
 input[type="text"],
 input[type="date"],

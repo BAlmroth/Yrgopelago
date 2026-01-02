@@ -1,6 +1,22 @@
 <?php require __DIR__ . '/../app/autoload.php'; ?>
 <?php require __DIR__ . '/header.php'; ?>
 
+    <section class="upperForm">
+        
+        <?php
+        $rooms = getRooms($database);
+        
+        foreach ($rooms as $room) { ?>
+            <div class="calendars"> <?php
+            echo ($room['name']);
+            
+            $roomId = $room['id'];
+            require __DIR__ . '/../app/bookings/calendar.php'; ?>
+            </div> <?php
+        }
+        ?>
+    </section>
+
 <!-- checkIn -->
 <form action="<?= $config['base_url'] ?>/app/bookings/validateBooking.php" method="post">
 
@@ -36,7 +52,6 @@
         <option value="<?= $room['name'] ?>"><?= $room['name']; ?></option> <?php } ?>
         </select>
 
-    <label for=""></label>
 
     <?php 
     $features = getFeatures($database); 
@@ -60,16 +75,6 @@
     <button type="submit" class="dates-button">Finalize booking</button>
 </form>
 
-<?php
-$rooms = getRooms($database);
-
-foreach ($rooms as $room) {
-    echo ($room['name']);
-
-    $roomId = $room['id'];
-    require __DIR__ . '/../app/bookings/calendar.php';
-}
-?>
 
 <!-- //gör om så att när man har vlt och trycker continue ska man skickas till validateBooking, där kollas det om allt är rätt. om det inte är rätt skickas man tillbaka till booking.php och får ett error meddelande.
 är det rätt -> printa valen på booking för validering.  -->
