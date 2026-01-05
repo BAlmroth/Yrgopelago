@@ -106,11 +106,15 @@
         id="transferCode" 
         type="text">
         
+        <?php require __DIR__ . '/../app/bookings/transferService.php'; ?>
+
         <button type="submit" class="dates-button">Finalize booking</button>
     </form>
     </section>
 
 </section>
+
+
 
 <script>
 const rooms = <?= json_encode($rooms) ?>;
@@ -147,7 +151,44 @@ select.addEventListener('change', function () {
         activeCalendar.style.display = 'block';
     }
 });
+
+// transfercode service
+const transferForm = document.getElementById('getTransferCode');
+const result = document.getElementById('transferResult');
+
+transferForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(transferForm);
+    const data = Object.fromEntries(formData.entries());
+
+    fetch('https://www.yrgopelag.se/centralbank/withdraw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            user: data.user,
+            api_key: data.api_key,
+            amount: data.amount
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            result.textContent = 'Error: ' + data.error;
+        } else {
+            result.textContent = 'Your transfer code: ' + data.transferCode;
+
+            // optional auto-fill
+            document.getElementById('transferCode').value = data.transferCode;
+        }
+    })
+    .catch(() => {
+        result.textContent = 'Something went wrong. Try again.';
+    });
+});
+
 </script>
+<?php require __DIR__ . '/footer.php'; ?>
 
 <!-- //gör om så att när man har vlt och trycker continue ska man skickas till validateBooking, där kollas det om allt är rätt. om det inte är rätt skickas man tillbaka till booking.php och får ett error meddelande.
 är det rätt -> printa valen på booking för validering.  -->
