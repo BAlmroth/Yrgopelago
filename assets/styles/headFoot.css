@@ -1,0 +1,86 @@
+/* header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 6px 16px;
+    background-color: #154794cc;
+
+}
+
+
+.logoBar {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row; 
+    gap: 1rem;
+    align-items: center;
+}
+
+.logo {
+    height: 60px;
+}
+
+.nav a {
+    margin-left: 24px;
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+}
+
+.nav a:hover {
+    color: #007bff;
+}
+
+/* footer */
+.footer {
+    background-color: #88a9c2d0;
+    border-top: 1px solid #e5e5e5;
+    padding: 24px 32px 16px;
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.footerBrand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.footer-logo {
+    height: 45px;
+}
+
+
+.footer-nav a {
+    margin-left: 24px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.footer-nav a:hover {
+    color: #007bff;
+}
+
+.footer-copy {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: #444;
+    text-align: center;
+}

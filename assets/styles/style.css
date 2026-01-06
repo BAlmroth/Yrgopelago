@@ -1,0 +1,191 @@
+/* root */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    --titleFont: "Bubblegum Sans", sans-serif;
+    --bodyFont:  "Open Sans", sans-serif;
+
+    --h1Size: 80px;
+    --h2Size: 60px;
+
+    --h4Size: 20px;
+
+}
+
+body {
+    font-family: var(--bodyFont);
+}
+
+h1, h2, h3 {
+    font-family: var(--titleFont);
+}
+
+h1 {
+    font-size: var(--h1Size);
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: var(--h2Size);
+}
+h4 {
+    font-size: var(--h4Size);
+}
+
+/* hero */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.heroText {
+    position: absolute;
+    width: 100%;
+    top: 35%;
+    text-align: center;
+    gap: 2rem;
+}
+
+/* divider */
+.divider {
+    position: absolute;
+    bottom: -35%;
+    width: 100%;
+    height: 541px;
+    background-image: url("../images/divider.png");
+    background-position: center;
+
+
+
+}
+
+.content {
+        margin-top: 275px;
+    background: linear-gradient(-180deg, rgb(250, 231, 145), rgb(255, 255, 204));
+}
+
+.intro {
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 5rem 25rem;
+    gap: 4rem;
+}
+
+/* rooms */
+.aboutRooms {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.aboutRooms h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.4rem;
+}
+
+
+.roomsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}
+
+.roomTop {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+}
+
+.roomBottom {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: space-around;
+}
+.roomCard {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid #6b8e23;
+    padding: 2rem;
+    gap: 1.5rem;
+}
+
+.roomContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.roomCard h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.6rem;
+}
+
+.roomTier {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.95rem;
+    color: #6b8e23;
+    font-weight: 600;
+}
+
+.roomContent p {
+    margin: 0 0 0.9rem 0;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+
+.roomPrice {
+    margin-top: auto;
+    font-weight: bold;
+    font-size: 1.15rem;
+    text-align: left;
+    color: #b36b00;
+}
+
+
+.roomImages {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+
+}
+
+.roomImages img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.bookingButton {
+
+    padding: 0.75rem 1.5rem;
+    background-color: #6b8e23;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.bookingButton:hover {
+    background-color: #54701a;
+}

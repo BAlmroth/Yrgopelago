@@ -1,44 +1,98 @@
+/* layou */
+
+.upperForm,
+.lowerForm {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    align-items: flex-start;
+    background-color: #d1f8ffab;
+
+}
+
+.leftBox,
+.roomBox {
+    flex: 1;
+    background-color: #ffffff94;
+    min-height: 580px;
+    padding: 1.5rem;
+}
+
+/* form */
 
 form {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	max-width: 720px;
-	margin: 1.5rem;
-	padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    align-items: center;
+
 }
 
-label {
-	font-weight: 600;
-}
+/* inout */
 
 input[type="text"],
 input[type="date"],
 select {
-	display: block;
-	width: 100%;
-	max-width: 360px;
-	padding: 0.5rem 0.6rem;
-	border: 1px solid #d0d7de;
-	border-radius: 6px;
+    width: 100%;
+    max-width: 360px;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
 }
 
-label > input[type="checkbox"] {
-	margin-right: 0.5rem;
+.roomBox label,
+#room {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
 }
 
-.dates-button {
-	align-self: flex-start;
-	padding: 0.55rem 0.9rem;
-	border: 1px solid #6b6b6b;
-	background: #000000;
-	color: #fff;
-	border-radius: 6px;
-	cursor: pointer;
+
+/* calendar */
+
+.calendars {
+    text-align: center;
+    margin-top: 1.5rem;
 }
 
-.dates-button:hover {
-	background: #000000;
-	border-color: #5e5e5e;
+/* room prev  */
+
+#roomPreview {
+    margin-top: 1.5rem;
+}
+
+#roomPreview img {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    border-radius: 6px;
+    margin-right: 0.5rem;
+}
+
+.roomImages {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+
+}
+
+/* features */
+
+.features,
+.transferBox {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    margin: 0 auto;
+    background-color: #ffffff94;
+    min-height: 200px;
+    min-width: 200px;
+}
+
+.features {
+    align-items: flex-start;
 }
 

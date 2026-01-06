@@ -12,6 +12,9 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
     $checkIn = $_POST['checkIn'];
     $checkOut = $_POST['checkOut'];
     $room = $_POST['room'];
+
+    $roomId = (int) $_POST['room'];
+
     $bookedFeatures = $_POST['features'] ?? [];
     $transferCode = $_POST['transferCode'] ?? '';
 
@@ -28,9 +31,9 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
         foreach ($bookings as $booking) {
             $dbCheckIn = $booking['check_in'];
             $dbCheckOut = $booking['check_out'];
-            $dbRoomName = $booking['name'];
+            $dbRoomId = $booking['room_id'];
 
-            if ($dbRoomName === $room && $checkIn < $dbCheckOut && $checkOut > $dbCheckIn) {
+            if ($dbRoomId == $roomId && $checkIn < $dbCheckOut && $checkOut > $dbCheckIn) {
                 $errors[] = "The room is already booked during this timeframe.";
                 $isBooked = true;
                 break;
@@ -56,104 +59,115 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
             }
 
             // Room info
-            $roomStatement = $database->prepare("SELECT id, cost FROM rooms WHERE name = ?");
-            $roomStatement->execute([$room]);
+            $roomStatement = $database->prepare(
+                "SELECT id, cost FROM rooms WHERE id = ?"
+            );
+            $roomStatement->execute([$roomId]);
             $roomRow = $roomStatement->fetch(PDO::FETCH_ASSOC);
-            $roomId = $roomRow['id'];
 
-            // Booking to DB
-            $statement = $database->prepare("
-                INSERT INTO bookings 
-                (user_id, room_id, check_in, check_out)
-                VALUES (?, ?, ?, ?)
-            ");
-            $statement->execute([$dbUserId, $roomId, $checkIn, $checkOut]);
-
-            // Booking features
-            $bookingId = $database->lastInsertId();
-            if (!empty($bookedFeatures)) {
-                $featureStatement = $database->prepare("
-                    INSERT INTO booking_features (booking_id, feature_id)
-                    VALUES (?, ?)
-                ");
-                foreach ($bookedFeatures as $featureId) {
-                    $featureStatement->execute([$bookingId, $featureId]);
-                }
+            if (!$roomRow) {
+                $errors[] = "Selected room does not exist.";
             }
 
-            // Total price
-            $totalPrice = $roomRow['cost'];
-            if (!empty($bookedFeatures)) {
-                $placeholders = implode(',', array_fill(0, count($bookedFeatures), '?'));
-                $costStatement = $database->prepare("
-                    SELECT SUM(cost) as featuresCost FROM features WHERE id IN ($placeholders)
+
+            if (empty($errors)) {
+
+                // Booking to DB
+                $statement = $database->prepare("
+                    INSERT INTO bookings 
+                    (user_id, room_id, check_in, check_out)
+                    VALUES (?, ?, ?, ?)
                 ");
-                $costStatement->execute($bookedFeatures);
-                $featuresCost = $costStatement->fetchColumn();
-                $totalPrice += $featuresCost;
-            }
+                $statement->execute([$dbUserId, $roomId, $checkIn, $checkOut]);
 
-            $client = new Client(['base_uri' => 'https://www.yrgopelag.se/centralbank/']);
-            $hotelUser = 'Benita';
-            $apiKey = $_ENV['API_KEY'];
-
-            try {
-                // Validate transfer code
-                $res = $client->post('transferCode', [
-                    'json' => [
-                        'transferCode' => $transferCode,
-                        'totalCost' => $totalPrice
-                    ]
-                ]);
-                $validate = json_decode($res->getBody(), true);
-                if (isset($validate['error'])) throw new Exception($validate['error']);
-
-                // Deposit
-                $res = $client->post('deposit', [
-                    'json' => [
-                        'user' => $hotelUser,
-                        'transferCode' => $transferCode
-                    ]
-                ]);
-                $deposit = json_decode($res->getBody(), true);
-                if (!isset($deposit['status']) || $deposit['status'] !== "success") {
-                    throw new Exception($deposit['error'] ?? "Deposit failed");
-                }
-
-                // Receipt (UPDATED SAFELY)
-                $featuresForReceipt = [];
-
-                foreach ($bookedFeatures as $id) {
-                    $stmt = $database->prepare("SELECT category AS activity, tier FROM features WHERE id = ?");
-                    $stmt->execute([$id]);
-                    $feature = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                    if ($feature) {
-                        $featuresForReceipt[] = $feature;
+                // Booking features
+                $bookingId = $database->lastInsertId();
+                if (!empty($bookedFeatures)) {
+                    $featureStatement = $database->prepare("
+                        INSERT INTO booking_features (booking_id, feature_id)
+                        VALUES (?, ?)
+                    ");
+                    foreach ($bookedFeatures as $featureId) {
+                        $featureStatement->execute([$bookingId, $featureId]);
                     }
                 }
 
-                $res = $client->post('receipt', [
-                    'json' => [
-                        'user' => $hotelUser,
-                        'api_key' => $apiKey,
-                        'guest_name' => $userId,
-                        'arrival_date' => $checkIn,
-                        'departure_date' => $checkOut,
-                        'features_used' => $featuresForReceipt,
-                        'star_rating' => 1
-                    ]
-                ]);
+                // Total price
+                $totalPrice = $roomRow['cost'];
+                if (!empty($bookedFeatures)) {
+                    $placeholders = implode(',', array_fill(0, count($bookedFeatures), '?'));
+                    $costStatement = $database->prepare("
+                        SELECT SUM(cost) as featuresCost FROM features WHERE id IN ($placeholders)
+                    ");
+                    $costStatement->execute($bookedFeatures);
 
-                $receipt = json_decode($res->getBody(), true);
-                if (!isset($receipt['status']) || $receipt['status'] !== 'success') {
-                    throw new Exception($receipt['error'] ?? "Receipt failed");
+                    // ✅ FIX 4: NULL-safe
+                    $featuresCost = (int) $costStatement->fetchColumn();
+                    $totalPrice += $featuresCost;
                 }
 
-                echo "WOOOHOOOOOOOOO receipt sent!!!!";
+                $client = new Client(['base_uri' => 'https://www.yrgopelag.se/centralbank/']);
+                $hotelUser = 'Benita';
+                $apiKey = $_ENV['API_KEY'];
 
-            } catch (Exception $e) {
-                $errors[] = $e->getMessage();
+                try {
+                    // Validate transfer code
+                    $res = $client->post('transferCode', [
+                        'json' => [
+                            'transferCode' => $transferCode,
+                            'totalCost' => $totalPrice
+                        ]
+                    ]);
+                    $validate = json_decode($res->getBody(), true);
+                    if (isset($validate['error'])) throw new Exception($validate['error']);
+
+                    // Deposit
+                    $res = $client->post('deposit', [
+                        'json' => [
+                            'user' => $hotelUser,
+                            'transferCode' => $transferCode
+                        ]
+                    ]);
+                    $deposit = json_decode($res->getBody(), true);
+                    if (!isset($deposit['status']) || $deposit['status'] !== "success") {
+                        throw new Exception($deposit['error'] ?? "Deposit failed");
+                    }
+
+                    // Receipt
+                    $featuresForReceipt = [];
+
+                    foreach ($bookedFeatures as $id) {
+                        $stmt = $database->prepare("SELECT category AS activity, tier FROM features WHERE id = ?");
+                        $stmt->execute([$id]);
+                        $feature = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        if ($feature) {
+                            $featuresForReceipt[] = $feature;
+                        }
+                    }
+
+                    $res = $client->post('receipt', [
+                        'json' => [
+                            'user' => $hotelUser,
+                            'api_key' => $apiKey,
+                            'guest_name' => $userId,
+                            'arrival_date' => $checkIn,
+                            'departure_date' => $checkOut,
+                            'features_used' => $featuresForReceipt,
+                            'star_rating' => 1
+                        ]
+                    ]);
+
+                    $receipt = json_decode($res->getBody(), true);
+                    if (!isset($receipt['status']) || $receipt['status'] !== 'success') {
+                        throw new Exception($receipt['error'] ?? "Receipt failed");
+                    }
+
+                    echo "WOOOHOOOOOOOOO receipt sent!!!!";
+
+                } catch (Exception $e) {
+                    $errors[] = $e->getMessage();
+                }
             }
         }
     }
@@ -166,6 +180,7 @@ if (!empty($errors)) {
             <strong>UH OH</strong> <?= htmlspecialchars($error) ?>
         </div>
     <?php }
+    exit;
 }
 ?>
 

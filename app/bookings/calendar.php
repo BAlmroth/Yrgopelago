@@ -22,7 +22,7 @@ foreach ($bookings as $booking) {
 }
 ?>
 
-<section class="calendar">
+<div class="calendar">
 <?php
 for ($day = 1; $day <= 31; $day++) {
 
@@ -37,4 +37,4 @@ for ($day = 1; $day <= 31; $day++) {
     echo '<div class="' . implode(' ', $classes) . '">' . $day . '</div>';
 }
 ?>
-</section>
+</div>
