@@ -11,13 +11,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
-    <title>Document</title>
+    <title>Stardew Hotel</title>
 </head>
 <body>
 
   <header class="header">
     <div class="logoBar">
-        <img class="logo" src="../assets/images/rooster.svg" alt="rooster logo">
+        <img class="logo" src="<?= $config['base_url'] ?>/assets/images/rooster.svg" alt="rooster logo">
         <h3>Stardew Hotel</h3>
     </div>
     <nav class="nav">

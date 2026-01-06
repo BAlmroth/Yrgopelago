@@ -36,8 +36,8 @@ $rooms = getRooms($database);
         </div>
 
         <div class="roomImages">
-            <img src="/assets/images/<?= $room['outImage']; ?>" alt="<?= $room['name']; ?> Outside">
-            <img src="/assets/images/<?= $room['inImage']; ?>" alt="<?= $room['name']; ?> Inside">
+            <img src="assets/images/<?= $room['outImage']; ?>" alt="<?= $room['name']; ?> Outside">
+            <img src="assets/images/<?= $room['inImage']; ?>" alt="<?= $room['name']; ?> Inside">
         </div>
     </div>
 
