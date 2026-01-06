@@ -106,10 +106,10 @@
         id="transferCode" 
         type="text">
         
-        <?php require __DIR__ . '/../app/bookings/transferService.php'; ?>
-
+        
         <button type="submit" class="dates-button">Finalize booking</button>
     </form>
+    <?php require __DIR__ . '/../app/bookings/transferService.php'; ?>
     </section>
 
 </section>
