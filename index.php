@@ -62,5 +62,7 @@ $rooms = getRooms($database);
     </div>
 </section>
 
+<?php 
 
+?>
 <?php require __DIR__ . '/views/footer.php'; ?>

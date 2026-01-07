@@ -4,14 +4,14 @@
     <footer class="footer">
     <div class="footer-inner">
         <div class="footerBrand">
-        <img class="footer-logo" src="../assets/images/rooster.svg" alt="rooster logo">
+        <img class="footer-logo" src="<?= $config['base_url'] ?>/assets/images/rooster.svg" alt="rooster logo">
         <span>Stardew Hotel</span>
         </div>
 
         <nav class="footer-nav">
         <a href="#">home</a>
         <a href="#">About</a>
-        <a href="#">Admin</a>
+        <a href="<?= $config['base_url'] ?>/views/login.php">Admin</a>
         </nav>
     </div>
 

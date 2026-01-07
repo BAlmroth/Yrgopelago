@@ -20,7 +20,7 @@ function getRooms ($database) {
 //     ")
 // }
 
-// get booked dates and rooms, connected to room id.
+// get booked dates and rooms
 function getBookings ($database) {
     $statement = $database->query("
     SELECT * 
@@ -37,7 +37,7 @@ function getBookings ($database) {
 //get features från sql
 function getFeatures($database) {
     $statement = $database->query("
-        SELECT id, name, cost
+        SELECT id, name, cost, category
         FROM features
         WHERE name IN (
             'fishing trip',
@@ -50,7 +50,7 @@ function getFeatures($database) {
             'spend a day as a farmer',
             'visit the scull cavern'
         )
-        ORDER BY cost ASC
+        ORDER BY Category ASC
     ");
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }

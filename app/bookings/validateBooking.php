@@ -72,26 +72,6 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
 
             if (empty($errors)) {
 
-                // Booking to DB
-                $statement = $database->prepare("
-                    INSERT INTO bookings 
-                    (user_id, room_id, check_in, check_out)
-                    VALUES (?, ?, ?, ?)
-                ");
-                $statement->execute([$dbUserId, $roomId, $checkIn, $checkOut]);
-
-                // Booking features
-                $bookingId = $database->lastInsertId();
-                if (!empty($bookedFeatures)) {
-                    $featureStatement = $database->prepare("
-                        INSERT INTO booking_features (booking_id, feature_id)
-                        VALUES (?, ?)
-                    ");
-                    foreach ($bookedFeatures as $featureId) {
-                        $featureStatement->execute([$bookingId, $featureId]);
-                    }
-                }
-
                 // Total price
                 $totalPrice = $roomRow['cost'];
                 if (!empty($bookedFeatures)) {
@@ -133,6 +113,26 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                         throw new Exception($deposit['error'] ?? "Deposit failed");
                     }
 
+                                    // Booking to DB
+                $statement = $database->prepare("
+                    INSERT INTO bookings 
+                    (user_id, room_id, check_in, check_out)
+                    VALUES (?, ?, ?, ?)
+                ");
+                $statement->execute([$dbUserId, $roomId, $checkIn, $checkOut]);
+
+                // Booking features
+                $bookingId = $database->lastInsertId();
+                if (!empty($bookedFeatures)) {
+                    $featureStatement = $database->prepare("
+                        INSERT INTO booking_features (booking_id, feature_id)
+                        VALUES (?, ?)
+                    ");
+                    foreach ($bookedFeatures as $featureId) {
+                        $featureStatement->execute([$bookingId, $featureId]);
+                    }
+                }
+
                     // Receipt
                     $featuresForReceipt = [];
 
@@ -163,8 +163,51 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                         throw new Exception($receipt['error'] ?? "Receipt failed");
                     }
 
-                    echo "WOOOHOOOOOOOOO receipt sent!!!!";
 
+                // reciept
+
+                $rooms = getRooms($database);
+
+
+                $features = getFeatures($database);
+
+
+                $roomName = '';
+                $roomCost = 0;
+                foreach ($rooms as $r) {
+                    if ($r['id'] == $roomId) {
+                        $roomName = $r['name'];
+                        $roomCost = $r['cost'];
+                        break;
+                    }
+                }
+
+                $featureNames = [];
+                $totalPrice = $roomCost;
+
+                if (!empty($bookedFeatures)) {
+                    foreach ($bookedFeatures as $fId) {
+                        foreach ($features as $f) {
+                            if ($f['id'] == $fId) {
+                                $featureNames[] = $f['name'];
+                                $totalPrice += $f['cost'];
+                            }
+                        }
+                    }
+                }
+
+                ?>
+
+                <p>Your room has been booked!</p>
+                <p>Your receipt:</p>
+                <p>Name: <?= htmlspecialchars($userId) ?></p>
+                <p>Room: <?= htmlspecialchars($roomName) ?></p>
+                <p>Check-in: <?= htmlspecialchars($checkIn) ?></p>
+                <p>Check-out: <?= htmlspecialchars($checkOut) ?></p>
+                <p>Features: <?= !empty($featureNames) ? implode(', ', $featureNames) : 'None' ?></p>
+                <p>Total cost: <?= htmlspecialchars($totalPrice) ?> g</p>
+
+                <?php
                 } catch (Exception $e) {
                     $errors[] = $e->getMessage();
                 }
