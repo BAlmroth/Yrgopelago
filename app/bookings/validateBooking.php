@@ -72,26 +72,6 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
 
             if (empty($errors)) {
 
-                // Booking to DB
-                $statement = $database->prepare("
-                    INSERT INTO bookings 
-                    (user_id, room_id, check_in, check_out)
-                    VALUES (?, ?, ?, ?)
-                ");
-                $statement->execute([$dbUserId, $roomId, $checkIn, $checkOut]);
-
-                // Booking features
-                $bookingId = $database->lastInsertId();
-                if (!empty($bookedFeatures)) {
-                    $featureStatement = $database->prepare("
-                        INSERT INTO booking_features (booking_id, feature_id)
-                        VALUES (?, ?)
-                    ");
-                    foreach ($bookedFeatures as $featureId) {
-                        $featureStatement->execute([$bookingId, $featureId]);
-                    }
-                }
-
                 // Total price
                 $totalPrice = $roomRow['cost'];
                 if (!empty($bookedFeatures)) {
@@ -132,6 +112,26 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                     if (!isset($deposit['status']) || $deposit['status'] !== "success") {
                         throw new Exception($deposit['error'] ?? "Deposit failed");
                     }
+
+                                    // Booking to DB
+                $statement = $database->prepare("
+                    INSERT INTO bookings 
+                    (user_id, room_id, check_in, check_out)
+                    VALUES (?, ?, ?, ?)
+                ");
+                $statement->execute([$dbUserId, $roomId, $checkIn, $checkOut]);
+
+                // Booking features
+                $bookingId = $database->lastInsertId();
+                if (!empty($bookedFeatures)) {
+                    $featureStatement = $database->prepare("
+                        INSERT INTO booking_features (booking_id, feature_id)
+                        VALUES (?, ?)
+                    ");
+                    foreach ($bookedFeatures as $featureId) {
+                        $featureStatement->execute([$bookingId, $featureId]);
+                    }
+                }
 
                     // Receipt
                     $featuresForReceipt = [];
