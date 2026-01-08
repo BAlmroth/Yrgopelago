@@ -1,53 +1,52 @@
 /* layou */
 
 .bookingMain {
-    background-image: url("../images/background.jpg");
-    background-size: 100%;
-    background-attachment: fixed;
+  background-image: url("../images/background.jpg");
+  background-size: 100%;
+  background-attachment: fixed;
 }
 
 .leftBox,
 .roomBox,
 .transferBox,
 .featureCard {
-    border-radius: 0.5rem;
-    box-shadow: inset 2px 2px 0 0 #ad6437;
-    background-image: linear-gradient(#FFCB7B, #EBA867);
-    border-color: #cc6900;
-    border-style: outset;
-    border-width: 9px;
+  border-radius: 0.5rem;
+  box-shadow: inset 2px 2px 0 0 #ad6437;
+  background-image: linear-gradient(#ffcb7b, #eba867);
+  border-color: #cc6900;
+  border-style: outset;
+  border-width: 9px;
 }
 
 .bookingIntro {
-    padding-top: 8rem;
-    text-align: center;
+  padding-top: 8rem;
+  text-align: center;
 }
 .upperForm,
 .lowerForm {
-    display: flex;
-    gap: 2rem;
-    padding: 2rem;
-    align-items: flex-start;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .leftBox,
 .roomBox {
-    flex: 1;
-    min-height: 580px;
-    padding: 1.5rem;
-    margin-top: 4rem;
+  flex: 1;
+  min-height: 580px;
+  padding: 1.5rem;
+  margin-top: 4rem;
 }
 
 /* form */
 
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
-    align-items: center;
-
+  align-items: center;
 }
 
 /* inout */
@@ -55,109 +54,106 @@ form {
 input[type="text"],
 input[type="date"],
 select {
-    width: 100%;
-    max-width: 360px;
-    padding: 0.5rem 0.6rem;
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
+  width: 100%;
+  max-width: 360px;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
 }
 
 .roomBox label,
 #room {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
 }
-
 
 /* calendar */
 
 .calendars {
-    text-align: center;
-    margin-top: 1.5rem;
+  text-align: center;
+  margin-top: 1.5rem;
 }
 
 /* room prev  */
 
 #roomPreview {
-    margin-top: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 #roomPreview img {
-    width: 100%;
-    max-width: 260px;
-    height: auto;
-    border-radius: 6px;
-    margin-right: 0.5rem;
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  border-radius: 6px;
+  margin-right: 0.5rem;
 }
 
 .roomImages {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    justify-content: center;
-
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  justify-content: center;
 }
 
 /* features */
 
-
 .transferBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    background-color: #ffffff94;
-    min-height: 200px;
-    min-width: 50%;
-    border-radius: 1rem;
-    padding: 2rem;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  background-color: #ffffff94;
+  min-height: 200px;
+  min-width: 50%;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 0 auto;
 }
 .transferService {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #cb9157;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    margin-top: 2rem;
-    gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #cb9157;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  gap: 2rem;
 }
 
 #getTransferCode {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .features {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    width: 100%;
-    margin: 0 20rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+  margin: 0 20rem;
 }
 
 .featuresIntro {
-    text-align: center;
-    margin: 0 auto;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .featureCard {
-    background-color: #ffffffcc;
-    border-radius: 1rem;
-    padding: 1.5rem;
+  background-color: #ffffffcc;
+  border-radius: 1rem;
+  padding: 1.5rem;
 }
 
 .featureCard h3 {
-    margin-bottom: 1rem;
-    text-align: center;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .featureCard label {
-    display: block;
-    margin-bottom: 0.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
 }

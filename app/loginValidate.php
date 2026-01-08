@@ -1,4 +1,5 @@
 <?php
+//check if input in login form matches info in .env
 declare(strict_types=1);
 session_start();
 

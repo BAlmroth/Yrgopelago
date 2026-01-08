@@ -113,27 +113,27 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                         throw new Exception($deposit['error'] ?? "Deposit failed");
                     }
 
-                                    // Booking to DB
-                $statement = $database->prepare("
+                    // Booking to DB
+                    $statement = $database->prepare("
                     INSERT INTO bookings 
                     (user_id, room_id, check_in, check_out)
                     VALUES (?, ?, ?, ?)
                 ");
-                $statement->execute([$dbUserId, $roomId, $checkIn, $checkOut]);
+                    $statement->execute([$dbUserId, $roomId, $checkIn, $checkOut]);
 
-                // Booking features
-                $bookingId = $database->lastInsertId();
-                if (!empty($bookedFeatures)) {
-                    $featureStatement = $database->prepare("
+                    // Booking features
+                    $bookingId = $database->lastInsertId();
+                    if (!empty($bookedFeatures)) {
+                        $featureStatement = $database->prepare("
                         INSERT INTO booking_features (booking_id, feature_id)
                         VALUES (?, ?)
                     ");
-                    foreach ($bookedFeatures as $featureId) {
-                        $featureStatement->execute([$bookingId, $featureId]);
+                        foreach ($bookedFeatures as $featureId) {
+                            $featureStatement->execute([$bookingId, $featureId]);
+                        }
                     }
-                }
 
-                    // Receipt
+                    // Receipt top api
                     $featuresForReceipt = [];
 
                     foreach ($bookedFeatures as $id) {
@@ -164,50 +164,47 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                     }
 
 
-                // reciept
+                    // visual reciept
 
-                $rooms = getRooms($database);
+                    $rooms = getRooms($database);
+                    $features = getFeatures($database);
 
-
-                $features = getFeatures($database);
-
-
-                $roomName = '';
-                $roomCost = 0;
-                foreach ($rooms as $r) {
-                    if ($r['id'] == $roomId) {
-                        $roomName = $r['name'];
-                        $roomCost = $r['cost'];
-                        break;
+                    $roomName = '';
+                    $roomCost = 0;
+                    foreach ($rooms as $r) {
+                        if ($r['id'] == $roomId) {
+                            $roomName = $r['name'];
+                            $roomCost = $r['cost'];
+                            break;
+                        }
                     }
-                }
 
-                $featureNames = [];
-                $totalPrice = $roomCost;
+                    $featureNames = [];
+                    $totalPrice = $roomCost;
 
-                if (!empty($bookedFeatures)) {
-                    foreach ($bookedFeatures as $fId) {
-                        foreach ($features as $f) {
-                            if ($f['id'] == $fId) {
-                                $featureNames[] = $f['name'];
-                                $totalPrice += $f['cost'];
+                    if (!empty($bookedFeatures)) {
+                        foreach ($bookedFeatures as $fId) {
+                            foreach ($features as $f) {
+                                if ($f['id'] == $fId) {
+                                    $featureNames[] = $f['name'];
+                                    $totalPrice += $f['cost'];
+                                }
                             }
                         }
                     }
-                }
 
-                ?>
+?>
 
-                <p>Your room has been booked!</p>
-                <p>Your receipt:</p>
-                <p>Name: <?= htmlspecialchars($userId) ?></p>
-                <p>Room: <?= htmlspecialchars($roomName) ?></p>
-                <p>Check-in: <?= htmlspecialchars($checkIn) ?></p>
-                <p>Check-out: <?= htmlspecialchars($checkOut) ?></p>
-                <p>Features: <?= !empty($featureNames) ? implode(', ', $featureNames) : 'None' ?></p>
-                <p>Total cost: <?= htmlspecialchars($totalPrice) ?> g</p>
+                    <p>Your room has been booked!</p>
+                    <p>Your receipt:</p>
+                    <p>Name: <?= htmlspecialchars($userId) ?></p>
+                    <p>Room: <?= htmlspecialchars($roomName) ?></p>
+                    <p>Check-in: <?= htmlspecialchars($checkIn) ?></p>
+                    <p>Check-out: <?= htmlspecialchars($checkOut) ?></p>
+                    <p>Features: <?= !empty($featureNames) ? implode(', ', $featureNames) : 'None' ?></p>
+                    <p>Total cost: <?= htmlspecialchars($totalPrice) ?> g</p>
 
-                <?php
+        <?php
                 } catch (Exception $e) {
                     $errors[] = $e->getMessage();
                 }
@@ -222,11 +219,11 @@ if (!empty($errors)) {
         <div>
             <strong>UH OH</strong> <?= htmlspecialchars($error) ?>
         </div>
-    <?php }
+<?php }
     exit;
 }
 ?>
 
 <form action="<?= $config['base_url'] ?>/views/booking.php">
-    <input type="submit" value="Back" /> 
+    <input type="submit" value="Back" />
 </form>

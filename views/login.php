@@ -26,6 +26,6 @@ require __DIR__ . '/header.php';
         </div>
         <button type="submit">Login</button>
     </form>
-    </section>
+</section>
 
 <?php require __DIR__ . '/footer.php'; ?>
