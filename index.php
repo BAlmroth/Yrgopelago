@@ -46,6 +46,16 @@ $rooms = getRooms($database);
                             $roomId = $room['id'];
                             include __DIR__ . '/app/bookings/calendar.php';
                             ?>
+                            <div class="calendarLegend">
+                                <div class="legendItem">
+                                    <div class="colorBox booked"></div>
+                                    <span>Booked</span>
+                                </div>
+                                <div class="legendItem">
+                                    <div class="colorBox free"></div>
+                                    <span>Free</span>
+                                </div>
+                            </div>
                         </div>
 
                         <a href="<?= $config['base_url'] ?>/views/booking.php" class="bookingButton">Go to Booking</a>

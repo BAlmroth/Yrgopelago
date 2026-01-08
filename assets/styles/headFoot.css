@@ -5,11 +5,9 @@
   left: 0;
   width: 100%;
   z-index: 10;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   padding: 6px 16px;
   background-color: #154794cc;
 }
@@ -18,10 +16,9 @@
   font-size: 1.5rem;
   font-weight: bold;
   display: flex;
-  flex-direction: row;
   gap: 1rem;
   align-items: center;
-  color: #ffb76a;
+  color: var(--titleColor);
 }
 
 .logo {
@@ -32,13 +29,13 @@
   margin-left: 24px;
   text-decoration: none;
   font-size: 1.5rem;
-  text-decoration: none;
   color: #fff;
 }
 
 .nav a:hover {
   color: var(--titleColor);
 }
+
 /* footer */
 .footer {
   background-color: #88a9c2d0;
@@ -83,8 +80,7 @@
   text-align: center;
 }
 
-
 .starImage {
-    width: 70px;
-    height: 70px;
+  width: 70px;
+  height: 70px;
 }

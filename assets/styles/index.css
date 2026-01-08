@@ -1,0 +1,133 @@
+/* hero */
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: url("../images/background.jpg") center/cover no-repeat;
+}
+
+.heroText {
+  position: absolute;
+  width: 100%;
+  top: 35%;
+  text-align: center;
+  gap: 2rem;
+}
+
+/* divider */
+.divider {
+  position: absolute;
+  bottom: -35%;
+  width: 100%;
+  height: 541px;
+  background: url("../images/divider.png") center no-repeat;
+}
+
+.content {
+  margin-top: 275px;
+  background: linear-gradient(-180deg, rgb(250, 231, 145), rgb(255, 255, 204));
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 5rem 25rem;
+  gap: 4rem;
+}
+
+/* rooms */
+.aboutRooms {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.aboutRooms h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.roomsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+}
+
+.roomTop,
+.roomBottom {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.roomBottom {
+  justify-content: space-around;
+  background-color: var(--insetColor);
+  border-radius: 10px;
+}
+
+.roomCard,
+.bookingButton {
+  border-radius: 0.5rem;
+  box-shadow: var(--buttonShadow);
+  background-image: var(--buttonGradient);
+  border-color: var(--buttonBorder);
+  border-style: outset;
+}
+
+.roomCard {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  padding: 2rem;
+  gap: 1.5rem;
+  border-width: 9px;
+}
+
+.roomContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 1rem;
+  line-height: 1.6;
+}
+
+.roomTier {
+  color: #527c00;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.roomPrice {
+  margin-top: auto;
+  font-weight: bold;
+  font-size: 1.15rem;
+  text-align: left;
+  color: #744500;
+}
+
+.roomImages {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.roomImages img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.bookingButton {
+  padding: 1rem 2rem;
+}
+
+.roomCalendar {
+  text-align: center;
+  padding: 1rem;
+}
+

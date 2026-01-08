@@ -42,3 +42,32 @@
   /* font-weight: 600; */
 }
 
+/* calendar info */
+.calendarLegend {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.colorBox {
+    width: 15px;
+    height: 15px;
+}
+
+.colorBox.booked {
+    background-color: red;
+}
+
+.colorBox.free {
+    background-color: white;
+}

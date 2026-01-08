@@ -6,18 +6,23 @@
     
     --titleFont: "Bubblegum Sans", sans-serif;
     --bodyFont: "Open Sans", sans-serif;
-    
+
     --h1Size: 80px;
     --h2Size: 60px;
     --h3Size: 40px;
     --h4Size: 20px;
 
     /* colors */
-
     --fontColor: #3a2228;
     --titleColor: #ffb76a;
     --insetColor: #cb9157;
-    
+    --hoverLink: #5a4936;
+    --inputBorder: #b8794f;
+    --inputBG: #ffebd5;
+    --buttonShadow: inset 2px 2px 0 0 #ad6437;
+    --buttonGradient: linear-gradient(#ffcb7b, #eba867);
+    --buttonBorder: #cc6900;
+
     font-family: var(--bodyFont);
 }
 
@@ -25,16 +30,14 @@ body {
   color: var(--fontColor);
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   font-family: var(--titleFont);
 }
 
 h1 {
   font-size: var(--h1Size);
   margin-bottom: 1rem;
-  color: #ffb76a;
+  color: var(--titleColor);
 }
 
 h2 {
@@ -42,9 +45,10 @@ h2 {
 }
 
 h3 {
-    font-size: var(--h3Size);
-    margin-bottom: 1rem;
+  font-size: var(--h3Size);
+  margin-bottom: 1rem;
 }
+
 h4 {
   font-size: var(--h4Size);
 }
@@ -55,20 +59,18 @@ a {
   color: var(--fontColor);
 }
 a:visited {
-  text-decoration: none;
   color: var(--fontColor);
 }
 a:hover {
-  text-decoration: none;
-  color: #5a4936;
+  color: var(--hoverLink);
 }
 
 button,
 .bookingButton {
   border-radius: 0.5rem;
-  box-shadow: inset 2px 2px 0 0 #ad6437;
-  background-image: linear-gradient(#ffcb7b, #eba867);
-  border-color: #cc6900;
+  box-shadow: var(--buttonShadow);
+  background-image: var(--buttonGradient);
+  border-color: var(--buttonBorder);
   border-style: outset;
   border-width: 6px;
   padding: 1rem;
@@ -80,150 +82,11 @@ button:hover {
 input[type="text"],
 input[type="date"],
 select {
-    width: 100%;
+  width: 100%;
   max-width: 360px;
   padding: 0.5rem 0.6rem;
-  border: 2px solid #b8794f;
+  border: 2px solid var(--inputBorder);
   border-radius: 6px;
-  background-color: #ffebd5;
+  background-color: var(--inputBG);
   font-family: var(--bodyFont);
-}
-
-/* hero */
-.hero {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  background-image: url("../images/background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.heroText {
-  position: absolute;
-  width: 100%;
-  top: 35%;
-  text-align: center;
-  gap: 2rem;
-}
-
-/* divider */
-.divider {
-  position: absolute;
-  bottom: -35%;
-  width: 100%;
-  height: 541px;
-  background-image: url("../images/divider.png");
-  background-position: center;
-}
-
-.content {
-  margin-top: 275px;
-  background: linear-gradient(-180deg, rgb(250, 231, 145), rgb(255, 255, 204));
-}
-
-.intro {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 5rem 25rem;
-  gap: 4rem;
-}
-
-/* rooms */
-.aboutRooms {
-  padding: 4rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.aboutRooms h2 {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.roomsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  align-items: center;
-}
-
-.roomTop {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  align-items: center;
-}
-
-.roomBottom {
-  display: flex;
-  flex-direction: row;
-  margin-top: 1rem;
-  align-items: center;
-  justify-content: space-around;
-  background-color: var(--insetColor);
-  border-radius: 10px;
-
-}
-.roomCard {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  width: 100%;
-  padding: 2rem;
-  gap: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: inset 2px 2px 0 0 #ad6437;
-  background-image: linear-gradient(#ffcb7b, #eba867);
-  border-color: #cc6900;
-  border-style: outset;
-  border-width: 9px;
-}
-
-.roomContent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  gap: 1rem;
-  line-height: 1.6;
-}
-
-.roomTier {
-  color: #527c00;
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.roomPrice {
-  margin-top: auto;
-  font-weight: bold;
-  font-size: 1.15rem;
-  text-align: left;
-  color: #744500;
-}
-
-.roomImages {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-}
-
-.roomImages img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.bookingButton {
-    padding: 1rem 2rem;
-    font-size: 1.5rem;
-}
-
-.roomCalendar {
-    text-align: center;
-    padding: 1rem;
 }

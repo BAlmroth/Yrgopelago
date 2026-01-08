@@ -52,6 +52,17 @@
                         $roomId = $room['id'];
                         require __DIR__ . '/../app/bookings/calendar.php';
                         ?>
+                        <!-- Legend for availability -->
+                        <div class="calendarLegend">
+                            <div class="legendItem">
+                                <div class="colorBox booked"></div>
+                                <span>Booked</span>
+                            </div>
+                            <div class="legendItem">
+                                <div class="colorBox free"></div>
+                                <span>Free</span>
+                            </div>
+                        </div>
                     </div>
                 <?php }
                 ?>
