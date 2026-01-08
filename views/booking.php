@@ -39,19 +39,19 @@
                 >
                 
                 <?php
-        $rooms = getRooms($database);   
-        foreach ($rooms as $room) { ?>
-            <div class="calendars" data-room-id="<?= $room['id'] ?>" style="display:none;">
-                <h3>Avalability</h3>
-                <?php
-                $roomId = $room['id'];
-                require __DIR__ . '/../app/bookings/calendar.php';
-                ?>
-            </div>
-            <?php }
+                $rooms = getRooms($database);   
+                foreach ($rooms as $room) { ?>
+                    <div class="calendars" data-room-id="<?= $room['id'] ?>" style="display:none;">
+                        <h3>Avalability</h3>
+                        <?php
+                        $roomId = $room['id'];
+                        require __DIR__ . '/../app/bookings/calendar.php';
+                        ?>
+                    </div>
+                <?php }
         ?>
 
-</section> 
+        </section> 
 
 <section class="roomBox">
     
