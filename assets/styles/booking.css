@@ -6,6 +6,18 @@
     background-attachment: fixed;
 }
 
+.leftBox,
+.roomBox,
+.transferBox,
+.featureCard {
+    border-radius: 0.5rem;
+    box-shadow: inset 2px 2px 0 0 #ad6437;
+    background-image: linear-gradient(#FFCB7B, #EBA867);
+    border-color: #cc6900;
+    border-style: outset;
+    border-width: 9px;
+}
+
 .bookingIntro {
     padding-top: 8rem;
     text-align: center;
@@ -22,11 +34,9 @@
 .leftBox,
 .roomBox {
     flex: 1;
-    background-color: #ffffff94;
     min-height: 580px;
     padding: 1.5rem;
     margin-top: 4rem;
-    border-radius: 1rem;
 }
 
 /* form */
@@ -96,10 +106,10 @@ select {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
     background-color: #ffffff94;
     min-height: 200px;
-    min-width: 200px;
+    min-width: 50%;
     border-radius: 1rem;
     padding: 2rem;
     margin: 0 auto;
@@ -108,6 +118,19 @@ select {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #cb9157;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+    gap: 2rem;
+}
+
+#getTransferCode {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .features {

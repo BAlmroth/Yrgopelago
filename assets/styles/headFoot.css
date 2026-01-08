@@ -23,6 +23,7 @@
     flex-direction: row; 
     gap: 1rem;
     align-items: center;
+    color: #ffb76a;;
 }
 
 .logo {
@@ -32,14 +33,14 @@
 .nav a {
     margin-left: 24px;
     text-decoration: none;
-    color: #333;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #fff;
 }
 
 .nav a:hover {
-    color: #007bff;
+    color: var(--titleColor);
 }
-
 /* footer */
 .footer {
     background-color: #88a9c2d0;
