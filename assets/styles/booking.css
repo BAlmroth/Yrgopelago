@@ -50,16 +50,6 @@ form {
 
 /* inout */
 
-input[type="text"],
-input[type="date"],
-select {
-  width: 100%;
-  max-width: 360px;
-  padding: 0.5rem 0.6rem;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-}
-
 .roomBox label,
 #room {
   display: block;
@@ -126,6 +116,11 @@ select {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+}
+
+.finalizeButton {
+    font-size: 2rem;
+    font-family: var(--titleFont);
 }
 
 .features {

@@ -1,23 +1,27 @@
 /* root */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    --titleFont: "Bubblegum Sans", sans-serif;
+    --bodyFont: "Open Sans", sans-serif;
+    
+    --h1Size: 80px;
+    --h2Size: 60px;
+    --h3Size: 40px;
+    --h4Size: 20px;
 
-  --titleFont: "Bubblegum Sans", sans-serif;
-  --bodyFont: "Open Sans", sans-serif;
+    /* colors */
 
-  --h1Size: 80px;
-  --h2Size: 60px;
-
-  --h4Size: 20px;
-
-  --fontColor: #3a2228;
-  --titleColor: #ffb76a;
+    --fontColor: #3a2228;
+    --titleColor: #ffb76a;
+    --insetColor: #cb9157;
+    
+    font-family: var(--bodyFont);
 }
 
 body {
-  font-family: var(--bodyFont);
   color: var(--fontColor);
 }
 
@@ -35,6 +39,11 @@ h1 {
 
 h2 {
   font-size: var(--h2Size);
+}
+
+h3 {
+    font-size: var(--h3Size);
+    margin-bottom: 1rem;
 }
 h4 {
   font-size: var(--h4Size);
@@ -66,6 +75,18 @@ button,
 }
 button:hover {
   scale: 1.1;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: 100%;
+  max-width: 360px;
+  padding: 0.5rem 0.6rem;
+  border: 2px solid #b8794f;
+  border-radius: 6px;
+  background-color: #ffebd5;
+  font-family: var(--bodyFont);
 }
 
 /* hero */
@@ -120,7 +141,6 @@ button:hover {
 .aboutRooms h2 {
   text-align: center;
   margin-bottom: 3rem;
-  font-size: 2.4rem;
 }
 
 .roomsContainer {
@@ -143,6 +163,9 @@ button:hover {
   margin-top: 1rem;
   align-items: center;
   justify-content: space-around;
+  background-color: var(--insetColor);
+  border-radius: 10px;
+
 }
 .roomCard {
   display: flex;
@@ -164,24 +187,14 @@ button:hover {
   display: flex;
   flex-direction: column;
   padding: 0;
-}
-
-.roomCard h3 {
-  margin: 0 0 0.3rem 0;
-  font-size: 1.6rem;
+  gap: 1rem;
+  line-height: 1.6;
 }
 
 .roomTier {
-  margin: 0 0 0.75rem 0;
-  font-size: 0.95rem;
-  color: #6b8e23;
-  font-weight: 600;
-}
-
-.roomContent p {
-  margin: 0 0 0.9rem 0;
-  line-height: 1.6;
-  font-size: 1.05rem;
+  color: #527c00;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .roomPrice {
@@ -189,7 +202,7 @@ button:hover {
   font-weight: bold;
   font-size: 1.15rem;
   text-align: left;
-  color: #b36b00;
+  color: #744500;
 }
 
 .roomImages {
@@ -203,4 +216,14 @@ button:hover {
   height: 250px;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.bookingButton {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+}
+
+.roomCalendar {
+    text-align: center;
+    padding: 1rem;
 }

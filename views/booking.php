@@ -128,17 +128,19 @@
 
         <section class="transferBox">
 
+            <h3>Checkout</h3>
+
             <p id="totalPrice"><strong>Your total:</strong> 0 g</p>
 
             <label for="transferCode">
-                <h3>insert transfercode:</h3>
+                <h4>insert transfercode:</h4>
             </label>
             <input
                 name="transferCode"
                 id="transferCode"
                 type="text">
 
-            <button type="submit" class="dates-button">Finalize booking</button>
+            <button type="submit" class="finalizeButton">Finalize booking</button>
             </form>
             <?php require __DIR__ . '/../app/bookings/transferService.php'; ?>
         </section>

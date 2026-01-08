@@ -1,6 +1,6 @@
 <section class="transferService">
 
-    <h3>Get transfer code</h3>
+    <h4>generate a transfer code for your booking</h4>
 
     <form id="getTransferCode">
         <label for="tc_user">Name:</label>

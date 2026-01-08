@@ -8,7 +8,7 @@ $rooms = getRooms($database);
 <section class="hero">
     <div class="heroText">
         <h1>Stardew Hotel</h1>
-        <h3>Leave your worries behind, get a taste of the simple life</h3>
+        <h4>Leave your worries behind, get a taste of the simple life</h4>
     </div>
     <div class="divider"></div>
 </section>
@@ -41,6 +41,7 @@ $rooms = getRooms($database);
 
                     <div class="roomBottom">
                         <div class="roomCalendar">
+                            <h4>Avalible dates:</h4>
                             <?php
                             $roomId = $room['id'];
                             include __DIR__ . '/app/bookings/calendar.php';
