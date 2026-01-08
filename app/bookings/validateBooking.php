@@ -58,17 +58,12 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                 $dbUserId = $database->lastInsertId();
             }
 
-            // Room info
-            $roomStatement = $database->prepare(
-                "SELECT id, cost FROM rooms WHERE id = ?"
-            );
-            $roomStatement->execute([$roomId]);
-            $roomRow = $roomStatement->fetch(PDO::FETCH_ASSOC);
+            // Room info 
+            $roomRow = getRoom($database, $roomId);
 
             if (!$roomRow) {
                 $errors[] = "Selected room does not exist.";
             }
-
 
             if (empty($errors)) {
 
@@ -85,7 +80,8 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                     $featuresCost = (int) $costStatement->fetchColumn();
                     $totalPrice += $featuresCost;
                 }
-
+                
+                //guzzle
                 $client = new Client(['base_uri' => 'https://www.yrgopelag.se/centralbank/']);
                 $hotelUser = 'Benita';
                 $apiKey = $_ENV['API_KEY'];
@@ -118,7 +114,8 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                     INSERT INTO bookings 
                     (user_id, room_id, check_in, check_out)
                     VALUES (?, ?, ?, ?)
-                ");
+                    ");
+
                     $statement->execute([$dbUserId, $roomId, $checkIn, $checkOut]);
 
                     // Booking features
@@ -133,7 +130,7 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                         }
                     }
 
-                    // Receipt top api
+                    // Receipt to api
                     $featuresForReceipt = [];
 
                     foreach ($bookedFeatures as $id) {
@@ -163,48 +160,8 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                         throw new Exception($receipt['error'] ?? "Receipt failed");
                     }
 
-
-                    // visual reciept
-
-                    $rooms = getRooms($database);
-                    $features = getFeatures($database);
-
-                    $roomName = '';
-                    $roomCost = 0;
-                    foreach ($rooms as $r) {
-                        if ($r['id'] == $roomId) {
-                            $roomName = $r['name'];
-                            $roomCost = $r['cost'];
-                            break;
-                        }
-                    }
-
-                    $featureNames = [];
-                    $totalPrice = $roomCost;
-
-                    if (!empty($bookedFeatures)) {
-                        foreach ($bookedFeatures as $fId) {
-                            foreach ($features as $f) {
-                                if ($f['id'] == $fId) {
-                                    $featureNames[] = $f['name'];
-                                    $totalPrice += $f['cost'];
-                                }
-                            }
-                        }
-                    }
-
-?>
-
-                    <p>Your room has been booked!</p>
-                    <p>Your receipt:</p>
-                    <p>Name: <?= htmlspecialchars($userId) ?></p>
-                    <p>Room: <?= htmlspecialchars($roomName) ?></p>
-                    <p>Check-in: <?= htmlspecialchars($checkIn) ?></p>
-                    <p>Check-out: <?= htmlspecialchars($checkOut) ?></p>
-                    <p>Features: <?= !empty($featureNames) ? implode(', ', $featureNames) : 'None' ?></p>
-                    <p>Total cost: <?= htmlspecialchars($totalPrice) ?> g</p>
-
-        <?php
+                    // insert visaul receipt
+                    require __DIR__ . '/receipt.php';
                 } catch (Exception $e) {
                     $errors[] = $e->getMessage();
                 }

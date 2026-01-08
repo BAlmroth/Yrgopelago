@@ -22,6 +22,16 @@
       <a href="<?= $config['base_url'] ?>/index.php"><img class="logo" src="<?= $config['base_url'] ?>/assets/images/rooster.svg" alt="rooster logo"></a>
       <h3>Stardew Hotel</h3>
     </div>
+
+    <div class="starRating">
+      <?php
+      $stars = getStars($database);
+
+      for ($i = 0; $i < $stars; $i++){ ?>
+        <img src="<?= $config['base_url'] ?>/assets/images/star.png" alt="Star" class="starImage">
+      <?php } ?>
+    </div>
+
     <nav class="nav">
       <a href="<?= $config['base_url'] ?>/index.php">Home</a>
       <a href="#">about</a>

@@ -75,7 +75,7 @@ if (isset($_POST['update_stars'])) {
 
 $rooms = getRooms($database);
 $features = getFeatures($database);
-$stars = $database->query("SELECT stars FROM stars WHERE id = 1")->fetchColumn();
+$stars = getStars($database);
 ?>
 
 <section class="admin">
