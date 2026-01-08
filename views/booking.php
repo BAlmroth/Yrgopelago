@@ -22,6 +22,9 @@
                     id="userId"
                     type="text">
 
+                <button type="button" id="checkLoyaltyButton">Check Loyalty Discount</button>
+                <p id="loyaltyMessage" style="color: green;"></p>
+
                 <label for="checkIn">
                     <h3>Check In:</h3>
                 </label>
@@ -160,7 +163,9 @@
 
 </section>
 
+<!-- help js get php info -->
 <script>
+    window.baseUrl = "<?= $config['base_url'] ?>";
     window.rooms = <?= json_encode($rooms) ?>;
 </script>
 

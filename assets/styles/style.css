@@ -22,6 +22,7 @@
     --buttonShadow: inset 2px 2px 0 0 #ad6437;
     --buttonGradient: linear-gradient(#ffcb7b, #eba867);
     --buttonBorder: #cc6900;
+    --navBackground: #154794cc;
 
     font-family: var(--bodyFont);
 }

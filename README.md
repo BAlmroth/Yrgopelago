@@ -1,6 +1,9 @@
 # Stardew Hotel
 
-This is a small web application, for a fictional hotel, inspired by the indie game *Stardew Valley*. It allows users to book rooms, add features to their stay, and handle payments through a transfer code system. The design and theme are influenced by the cozy and charming world of Stardew Valley created by the indie game developer *ConcernedApe*.
+This is a small web application, for a fictional hotel, inspired by the indie game _Stardew Valley_. It allows users to book rooms, add features to their stay, and handle payments through a transfer code system. The design and theme are influenced by the cozy and charming world of Stardew Valley created by the indie game developer _ConcernedApe_.
+
+## URL
+https://benalmroth.se/yrgopelago/
 
 ## Features
 
@@ -27,7 +30,6 @@ This is a small web application, for a fictional hotel, inspired by the indie ga
 3. Generate a transfer code using your name and the amount.
 4. Finalize the booking once the transfer code is validated.
 5. View your receipt and booking summary.
-
 
 ## Creator
 

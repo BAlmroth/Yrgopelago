@@ -8,7 +8,6 @@
         </div>
         <nav class="footer-nav">
             <a href="#">home</a>
-            <a href="#">About</a>
             <a href="<?= $config['base_url'] ?>/views/login.php">Admin</a>
         </nav>
     </div>

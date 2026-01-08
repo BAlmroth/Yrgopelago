@@ -35,7 +35,6 @@
 
     <nav class="nav">
       <a href="<?= $config['base_url'] ?>/index.php">Home</a>
-      <a href="#">about</a>
       <a href="<?= $config['base_url'] ?>/views/booking.php">Booking</a>
     </nav>
   </header>

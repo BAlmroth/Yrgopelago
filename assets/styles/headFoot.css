@@ -9,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 6px 16px;
-  background-color: #154794cc;
+  background-color: var(--navBackground);
 }
 
 .logoBar {
@@ -38,7 +38,7 @@
 
 /* footer */
 .footer {
-  background-color: #88a9c2d0;
+  background-color: var(--navBackground);
   border-top: 1px solid #e5e5e5;
   padding: 24px 32px 16px;
 }

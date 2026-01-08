@@ -6,6 +6,7 @@ use GuzzleHttp\Exception\RequestException;
 
 $errors = [];
 
+//base variables & error codes
 if (isset($_POST['checkIn'], $_POST['checkOut'])) {
 
     $userId = $_POST['userId'];
@@ -72,7 +73,9 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                 if (!empty($bookedFeatures)) {
                     $placeholders = implode(',', array_fill(0, count($bookedFeatures), '?'));
                     $costStatement = $database->prepare("
-                        SELECT SUM(cost) as featuresCost FROM features WHERE id IN ($placeholders)
+                        SELECT SUM(cost) as featuresCost 
+                        FROM features 
+                        WHERE id IN ($placeholders)
                     ");
                     $costStatement->execute($bookedFeatures);
 
@@ -80,6 +83,11 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                     $totalPrice += $featuresCost;
                 }
                 
+                //add discount
+                if ($user && $user['stays'] > 0) {
+                    $totalPrice -= 1;
+                }
+
                 //guzzle
                 $client = new Client(['base_uri' => 'https://www.yrgopelag.se/centralbank/']);
                 $hotelUser = 'Benita';

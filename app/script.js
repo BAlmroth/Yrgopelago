@@ -1,6 +1,7 @@
 const rooms = window.rooms;
 const select = document.getElementById("room");
 
+//show calendar for rooms
 function showCalendar(roomId) {
   document.querySelectorAll(".calendars").forEach((cal) => {
     cal.style.display = cal.dataset.roomId == roomId ? "block" : "none";
@@ -18,8 +19,11 @@ select.addEventListener("change", function () {
   }
 
   // Update preview
-  document.getElementById("outImage").src = "/assets/images/" + room.outImage;
-  document.getElementById("inImage").src = "/assets/images/" + room.inImage;
+  document.getElementById("outImage").src =
+    window.baseUrl + "/assets/images/" + room.outImage;
+  document.getElementById("inImage").src =
+    window.baseUrl + "/assets/images/" + room.inImage;
+
   document.getElementById("roomName").textContent = room.name;
   document.getElementById("roomPrice").textContent = room.cost + " g / night";
   document.getElementById("roomDescription").textContent = room.description;
@@ -28,7 +32,6 @@ select.addEventListener("change", function () {
   // calendar
   showCalendar(room.id);
 });
-
 
 // transfercode service
 const transferForm = document.getElementById("getTransferCode");
@@ -83,7 +86,7 @@ function getNights() {
 
   return diffDays > 0 ? diffDays : 0;
 }
-
+let userStays = 0;
 function updateTotal() {
   let total = 0;
   const nights = getNights();
@@ -101,9 +104,21 @@ function updateTotal() {
     }
   });
 
+  // Loyalty discount
+  let discount = 0;
+  if (userStays > 0) {
+    discount = 1;
+    total -= discount;
+  }
+
+  // Update display
   totalEl.innerHTML = `<strong>Your total:</strong> ${total} g`;
+  if (discount > 0) {
+    totalEl.innerHTML += ` <span style="color:green;">(-${discount}g loyalty discount)</span>`;
+  }
 }
 
+// Event listeners for total update
 select.addEventListener("change", updateTotal);
 featureCheckboxes.forEach((cb) => cb.addEventListener("change", updateTotal));
 checkInInput.addEventListener("change", updateTotal);
@@ -111,11 +126,51 @@ checkOutInput.addEventListener("change", updateTotal);
 
 //autoselect first room
 window.addEventListener("DOMContentLoaded", () => {
-  // Select first real room (skip "Select a room")
   if (select.options.length > 1) {
     select.selectedIndex = 1;
-
     select.dispatchEvent(new Event("change"));
     updateTotal();
   }
+});
+
+// check loyalty
+const checkLoyaltyButton = document.getElementById("checkLoyaltyButton");
+const loyaltyMessage = document.getElementById("loyaltyMessage");
+
+checkLoyaltyButton.addEventListener("click", () => {
+  const userName = document.getElementById("userId").value.trim();
+  if (!userName) {
+    alert("Please enter your name first.");
+    return;
+  }
+
+  fetch(window.baseUrl + "/app/bookings/loyalty.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `userId=${encodeURIComponent(userName)}`,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.error) {
+        loyaltyMessage.textContent = data.error;
+        userStays = 0;
+        updateTotal();
+        return;
+      }
+
+      if (data.loyalty) {
+        loyaltyMessage.textContent =
+          "Welcome back! You get 1g off your booking.";
+        userStays = data.stays;
+      } else {
+        loyaltyMessage.textContent =
+          "Welcome new guest! please proceed with the booking";
+        userStays = 0;
+      }
+
+      updateTotal();
+    })
+    .catch(() => {
+      loyaltyMessage.textContent = "Something went wrong. Try again.";
+    });
 });

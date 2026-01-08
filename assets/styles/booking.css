@@ -1,7 +1,8 @@
 .bookingMain {
-  background: url("../images/background.jpg") fixed/100% no-repeat;
+    background-image: url("../images/background.jpg");
+    background-size: 100%;
+    background-attachment: fixed;
 }
-
 .leftBox,
 .roomBox,
 .transferBox,
