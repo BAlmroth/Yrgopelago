@@ -34,8 +34,8 @@
 .leftBox,
 .roomBox {
   flex: 1;
-  min-height: 580px;
-  padding: 1.5rem;
+  min-height: 850px;
+  padding: 4rem 1.5rem 1.5rem;
   margin-top: 4rem;
 }
 
@@ -67,7 +67,7 @@ form {
 /* room prev  */
 
 #roomPreview {
-  margin-top: 1.5rem;
+  margin-top: 3rem;
 }
 
 #roomPreview img {
@@ -75,7 +75,12 @@ form {
   max-width: 260px;
   height: auto;
   border-radius: 6px;
-  margin-right: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+#roomPreview p,
+#roomName {
+    margin: 1rem 4rem;
 }
 
 .roomImages {

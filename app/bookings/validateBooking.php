@@ -76,7 +76,6 @@ if (isset($_POST['checkIn'], $_POST['checkOut'])) {
                     ");
                     $costStatement->execute($bookedFeatures);
 
-                    // ✅ FIX 4: NULL-safe
                     $featuresCost = (int) $costStatement->fetchColumn();
                     $totalPrice += $featuresCost;
                 }

@@ -108,3 +108,14 @@ select.addEventListener("change", updateTotal);
 featureCheckboxes.forEach((cb) => cb.addEventListener("change", updateTotal));
 checkInInput.addEventListener("change", updateTotal);
 checkOutInput.addEventListener("change", updateTotal);
+
+//autoselect first room
+window.addEventListener("DOMContentLoaded", () => {
+  // Select first real room (skip "Select a room")
+  if (select.options.length > 1) {
+    select.selectedIndex = 1;
+
+    select.dispatchEvent(new Event("change"));
+    updateTotal();
+  }
+});
