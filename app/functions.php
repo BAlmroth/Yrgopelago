@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 //get rooms från sql
 function getRooms($database)
 {

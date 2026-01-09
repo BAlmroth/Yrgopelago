@@ -106,7 +106,7 @@
     </section>
 
     <section class="lowerForm">
-
+        <!-- features -->
         <section class="featuresIntro">
             <h2>Add Features</h2>
             <h4>Want to spice up your stay wifth some activites?</h4>
@@ -162,13 +162,11 @@
     </section>
 
 </section>
-
 <!-- help js get php info -->
 <script>
     window.baseUrl = "<?= $config['base_url'] ?>";
     window.rooms = <?= json_encode($rooms) ?>;
 </script>
-
 <script src="<?= $config['base_url'] ?>/app/script.js"></script>
 
 <?php require __DIR__ . '/footer.php'; ?>
