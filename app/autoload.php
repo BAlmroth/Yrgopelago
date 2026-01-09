@@ -6,7 +6,7 @@ declare(strict_types=1);
 date_default_timezone_set('UTC');
 
 // Set the default character encoding to UTF-8.
-mb_internal_encoding('UTF-8');  
+mb_internal_encoding('UTF-8');
 
 // Include the helper functions.
 require __DIR__ . '/functions.php';
@@ -20,7 +20,5 @@ $database = new PDO($config['database_path']);
 require __DIR__ . '/../vendor/autoload.php';
 
 // api key
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..'); 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
-
-?>

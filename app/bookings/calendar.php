@@ -23,18 +23,18 @@ foreach ($bookings as $booking) {
 ?>
 
 <div class="calendar">
-<?php
-for ($day = 1; $day <= 31; $day++) {
+    <?php
+    for ($day = 1; $day <= 31; $day++) {
 
-    $classes = ['day'];
+        $classes = ['day'];
 
-    if (in_array($day, $bookedDays)) {
-        $classes[] = 'booked';
-    } elseif ($day % 7 === 0 || $day % 7 === 6) {
-        $classes[] = 'weekend';
+        if (in_array($day, $bookedDays)) {
+            $classes[] = 'booked';
+        } elseif ($day % 7 === 0 || $day % 7 === 6) {
+            $classes[] = 'weekend';
+        }
+
+        echo '<div class="' . implode(' ', $classes) . '">' . $day . '</div>';
     }
-
-    echo '<div class="' . implode(' ', $classes) . '">' . $day . '</div>';
-}
-?>
+    ?>
 </div>

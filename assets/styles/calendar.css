@@ -5,7 +5,7 @@
   width: 280px;
   margin: 1rem auto;
   font-family: system-ui, sans-serif;
-  background-color: #ad6437;
+  background-color: #3e1d09;
   padding: 1rem;
   border-radius: 1rem;
 }
@@ -42,6 +42,32 @@
   /* font-weight: 600; */
 }
 
-/* .booked:hover {
-    background: #d6caa5;
-} */
+/* calendar info */
+.calendarLegend {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.colorBox {
+    width: 15px;
+    height: 15px;
+}
+
+.colorBox.booked {
+    background-color: red;
+}
+
+.colorBox.free {
+    background-color: white;
+}
