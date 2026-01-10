@@ -38,3 +38,19 @@ This project was created by **Benita Almroth** (BAlmroth)
 ## License
 
 This project is for educational use and is inspired by **Stardew Valley**. All game-related content belongs to respective creators/owners.
+
+## Code review / John Ahlenhed
+
+index.php: 47 - Your current code works well, but it would be more efficient and clear to separate calendar logic. For example require backend calendar separate.
+
+validateBooking.php: 12 -13 - Sanitize input to minimize SQL injection.
+
+validateBooking.php: 46 - Statement only verifies username. Anyone can use other users discounts. Instead verify to centralbank with api key.
+
+validateBooking.php: 71 - SQL injection risk. Should validate numeric values before prepare and execute.
+
+validateBooking.php 96 - 138 - The transaction is made before validating with the database. This could result in deposit even if validation is failed.
+
+validateBooking.php: 156 - API Key is exposed in receipt.
+
+validateBooking.php: 141 - 168 - Receipt is sent to DB before received. If API call fails, the booking is already in DB.
